@@ -9,32 +9,46 @@ export function Blog() {
   const [author, setAuthor] = useState('')
   const [sortBy, setSortBy] = useState('createdAt')
   const [sortOrder, setSortOrder] = useState('descending')
+
   const postsQuery = useQuery({
     queryKey: ['posts', { author, sortBy, sortOrder }],
     queryFn: () => getPosts({ author, sortBy, sortOrder }),
   })
   const posts = postsQuery.data ?? []
+
   return (
-    <div style={{ padding: 8 }}>
-      <CreatePost />
-      <br />
-      <hr />
-      Filter by:
-      <PostFilter
-        field='author'
-        value={author}
-        onChange={(value) => setAuthor(value)}
-      />
-      <br />
-      <PostSorting
-        fields={['createdAt', 'updatedAt']}
-        value={sortBy}
-        onChange={(value) => setSortBy(value)}
-        orderValue={sortOrder}
-        onOrderChange={(orderValue) => setSortOrder(orderValue)}
-      />
-      <hr />
-      <PostList posts={posts} />
-    </div>
+    <main className='blog-page'>
+      <header className='blog-header'>
+        <h1>Crave Recipes</h1>
+        <p>Crave · Create · Consume</p>
+      </header>
+
+      <section className='blog-create'>
+        <CreatePost />
+      </section>
+
+      <section className='blog-controls'>
+        <div className='blog-filter'>
+          <span>Filter by</span>
+          <PostFilter
+            field='author'
+            value={author}
+            onChange={(value) => setAuthor(value)}
+          />
+        </div>
+
+        <PostSorting
+          fields={['createdAt', 'updatedAt']}
+          value={sortBy}
+          onChange={(value) => setSortBy(value)}
+          orderValue={sortOrder}
+          onOrderChange={(orderValue) => setSortOrder(orderValue)}
+        />
+      </section>
+
+      <section className='blog-posts'>
+        <PostList posts={posts} />
+      </section>
+    </main>
   )
 }
