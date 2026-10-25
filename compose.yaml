@@ -1,0 +1,26 @@
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo:6.0.4
+    # Uses host network in Codespaces to prevent bridge timeouts.
+    # In production, you can remove network_mode if you add a bridge network.
+    network_mode: host
+    restart: always
+
+  backend:
+    container_name: backend
+    image: blog-backend:latest
+    network_mode: host
+    env_file:
+      - ./backend/.env
+    restart: always
+    depends_on:
+      - mongodb
+
+  frontend:
+    container_name: frontend
+    image: blog-frontend:latest
+    network_mode: host
+    restart: always
+    depends_on:
+      - backend
