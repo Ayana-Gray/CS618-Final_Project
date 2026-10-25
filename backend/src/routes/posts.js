@@ -2,10 +2,10 @@ import {
   listAllPosts,
   listPostsByAuthor,
   listPostsByTag,
-  getPostById,
-  deletePost,
-  updatePost,
   createPost,
+  updatePost,
+  deletePost,
+  getPostById,
 } from '../services/posts.js'
 export function postsRoutes(app) {
   app.get('/api/v1/posts', async (req, res) => {
