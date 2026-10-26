@@ -8,10 +8,10 @@ on:
       - main
 jobs:
   lint-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        node-version: [24.x]
+        node-version: [20.x]
     defaults:
       run:
         working-directory: ./backend
