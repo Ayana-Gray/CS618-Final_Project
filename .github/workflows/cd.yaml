@@ -26,13 +26,13 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/crave-backend:${{ github.sha }}
       - id: deploy-backend
         name: Deploy backend
         uses: google-github-actions/deploy-cloudrun@v1
         with:
           service: crave-backend
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend:${{ github.sha }}
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/crave-backend:${{ github.sha }}
           region: ${{ secrets.GOOGLECLOUD_REGION }}
       - name: Build and push frontend image
         uses: docker/build-push-action@v4
@@ -40,12 +40,12 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/crave-frontend:${{ github.sha }}
           build-args: VITE_BACKEND_URL=${{ steps.deploy-backend.outputs.url }}/api/v1
       - id: deploy-frontend
         name: Deploy frontend
         uses: google-github-actions/deploy-cloudrun@v1
         with:
           service: crave-frontend
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend:${{ github.sha }}
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/crave-frontend:${{ github.sha }}
           region: ${{ secrets.GOOGLECLOUD_REGION }}
