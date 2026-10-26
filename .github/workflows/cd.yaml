@@ -31,7 +31,7 @@ jobs:
         name: Deploy backend
         uses: google-github-actions/deploy-cloudrun@v1
         with:
-          service: blog-backend
+          service: crave-backend
           image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend:${{ github.sha }}
           region: ${{ secrets.GOOGLECLOUD_REGION }}
       - name: Build and push frontend image
