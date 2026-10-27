@@ -1,16 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { createPost } from '../api/posts.js'
+import { useAuth } from '../contexts/AuthContext.jsx'
 export function CreatePost() {
+  const [token] = useAuth()
   const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
   const [contents, setContents] = useState('')
   const [ingredients, setIngredients] = useState('')
   const [image, setImage] = useState('')
   const queryClient = useQueryClient()
   const createPostMutation = useMutation({
     mutationFn: () =>
-      createPost({ title, author, ingredients, contents, image }),
+      createPost(token, { title, ingredients, contents, image }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['posts'] }),
   })
   const handleSubmit = (e) => {
@@ -28,17 +29,6 @@ export function CreatePost() {
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <br />
-      <div>
-        <label htmlFor='create-author'>Author: </label>
-        <input
-          type='text'
-          name='create-author'
-          id='create-author'
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
         />
       </div>
       <br />
@@ -73,10 +63,11 @@ export function CreatePost() {
       </div>
       <br />
       <br />
+      {!token ? <p>Please log in to create a post.</p> : null}
       <input
         type='submit'
         value={createPostMutation.isPending ? 'Creating...' : 'Create'}
-        disabled={!title || createPostMutation.isPending}
+        disabled={!token || !title || createPostMutation.isPending}
       />
 
       {createPostMutation.isSuccess ? (
