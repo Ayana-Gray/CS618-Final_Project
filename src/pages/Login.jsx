@@ -21,37 +21,55 @@ export function Login() {
     loginMutation.mutate()
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <Link to='/'>Back to main page</Link>
-      <hr />
+    <main className='login-page'>
+      <header className='login-header'>
+        <br />
+        <h1>Crave Recipes</h1>
+        <p>Crave · Create · Consume</p>
+        <br />
+        <Link to='/'>Back to main page</Link>
+      </header>
       <br />
-      <div>
-        <label htmlFor='create-username'>Username: </label>
-        <input
-          type='text'
-          name='create-username'
-          id='create-username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
       <br />
-      <div>
-        <label htmlFor='create-password'>Password: </label>
-        <input
-          type='password'
-          name='create-password'
-          id='create-password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
       <br />
-      <input
-        type='submit'
-        value={loginMutation.isPending ? 'Logging in...' : 'Log In'}
-        disabled={!username || !password || loginMutation.isPending}
-      />
-    </form>
+      <form onSubmit={handleSubmit} className='login-form'>
+        <section className='login-username_password'>
+          <center>
+            <h2>Please Log In</h2>
+          </center>
+          <div>
+            <label htmlFor='create-username'>Username: </label>
+            <input
+              type='text'
+              name='create-username'
+              id='create-username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <br />
+          <div>
+            <label htmlFor='create-password'>Password: </label>
+            <input
+              type='password'
+              name='create-password'
+              id='create-password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <br />
+        </section>
+        <br />
+        <br />
+        <div>
+          <input
+            type='submit'
+            value={loginMutation.isPending ? 'Logging in...' : 'Log In'}
+            disabled={!username || !password || loginMutation.isPending}
+          />
+        </div>
+      </form>
+    </main>
   )
 }
