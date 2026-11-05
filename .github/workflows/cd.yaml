@@ -55,5 +55,5 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: crave-frontend
-          image: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/crave-frontend:${{ github.sha }}
+          image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/crave-frontend:${{ github.sha }}
           region: ${{ secrets.GOOGLECLOUD_REGION }}
