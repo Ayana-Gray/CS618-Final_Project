@@ -32,7 +32,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/crave-backend:${{ github.sha }}
 
-      
       - id: deploy-backend
         name: Deploy backend
         uses: google-github-actions/deploy-cloudrun@v2
