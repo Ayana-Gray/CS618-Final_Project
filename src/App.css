@@ -85,6 +85,7 @@ article img {
 article{ font: inherit}
 
 .user-post {
+  color: #1e293b;
   max-width: 28rem;
   margin: 1.5rem auto;
   padding: clamp(1rem, 3vw, 1.75rem);
@@ -104,12 +105,12 @@ article{ font: inherit}
   object-fit: cover;
 }
 
-.user-post h3 {
+.user-post h2 {
   margin: 0 0 1rem;
   color: #1e293b;
   font-size: 1.5rem;
 }
-.user-post h4 {
+.user-post h3 {
   margin: 0 0 0.2rem;
   color: #1e293b;
   font-size: 1.2rem;
@@ -143,9 +144,17 @@ article{ font: inherit}
 
 .blog-header p {
   margin: 0.5rem 0 0;
-  color: #64748b;
+  color: #1e293b;
 }
-
+.blog-create > p {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: #fff;
+  color: #1e293b;
+  text-align: center;
+}
 .blog-create {
   margin: 2rem auto;
 }
@@ -207,7 +216,7 @@ article{ font: inherit}
 
 .login-header p {
   margin: 0.5rem 0 0;
-  color: #64748b;
+  color: #1e293b;
 }
 
 .login-create {
@@ -220,6 +229,7 @@ article{ font: inherit}
   padding: clamp(1.25rem, 4vw, 2.5rem);
   background: #fff;
   border: 1px solid #e5e7eb;
+  color: #1e293b;
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
 }
@@ -293,7 +303,7 @@ article{ font: inherit}
   margin: 0 auto;
   padding: 1.5rem;
   color: #1e293b;
-  background-color:#1e293b
+  background-color:#1e293b;
 }
 
 .signup-header {
@@ -310,7 +320,7 @@ article{ font: inherit}
 
 .signup-header p {
   margin: 0.5rem 0 0;
-  color: #64748b;
+  color: #1e293b;
 }
 
 .signup-create {
@@ -323,6 +333,7 @@ article{ font: inherit}
   padding: clamp(1.25rem, 4vw, 2.5rem);
   background: #fff;
   border: 1px solid #e5e7eb;
+  color: #1e293b;
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
 }
@@ -387,4 +398,69 @@ article{ font: inherit}
 
 .signup-form [role='alert'] {
   color: #b91c1c;
+}
+.blog-page,
+.login-page,
+.signup-page {
+  color: #f8fafc;
+  background-color: #1e293b;
+}
+
+.blog-header,
+.login-header,
+.signup-header,
+.view-post-header,
+.blog-controls {
+  color: #1e293b;
+}
+
+.view-post-page {
+  box-sizing: border-box;
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  color: #1e293b;
+  background-color:#1e293b
+}
+.view-post-header {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  background: #f1f5f9;
+  border-radius: 1rem;
+}
+
+.view-post-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.view-post-header p {
+  margin: 0.5rem 0 0;
+  color: #1e293b;
+}
+
+.view-post-navigation {
+  max-width: 52rem;
+  margin: 1.5rem auto;
+}
+
+.view-post-navigation a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.view-post-navigation a:hover {
+  text-decoration: underline;
+}
+
+.view-post-page .user-post {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.view-post-page .user-post img {
+  height: auto;
+  max-height: 26rem;
+  object-fit: contain;
 }

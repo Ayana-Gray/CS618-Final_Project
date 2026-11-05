@@ -1,23 +1,50 @@
 import PropTypes from 'prop-types'
 import { User } from './User.jsx'
-export function Post({ title, contents, author, ingredients, image }) {
+import { Link } from 'react-router-dom'
+import slug from 'slug'
+export function Post({
+  title,
+  contents,
+  author,
+  _id,
+  ingredients,
+  image,
+  fullPost = false,
+}) {
   return (
     <article className='user-post'>
-      {image && <img src={image} alt={title} />}
-      <h3>{title}</h3>
+      {image &&
+        (fullPost ? (
+          <img src={image} alt={title} />
+        ) : (
+          <Link to={`/posts/${_id}/${slug(title)}`}>
+            <img src={image} alt={title} />
+          </Link>
+        ))}
+      {fullPost ? (
+        <h2>{title}</h2>
+      ) : (
+        <Link to={`/posts/${_id}/${slug(title)}`}>
+          <h3>{title}</h3>
+        </Link>
+      )}
 
-      <div style={{ whiteSpace: 'pre-line' }}>
-        <h4>Ingredients </h4>
-        {ingredients}
-      </div>
+      {fullPost && (
+        <div style={{ whiteSpace: 'pre-line' }}>
+          <h3>Ingredients </h3>
+          {ingredients}
+        </div>
+      )}
       <br />
-      <div style={{ whiteSpace: 'pre-line' }}>
-        <h4>Recipe </h4>
-        {contents}
-      </div>
+      {fullPost && (
+        <div style={{ whiteSpace: 'pre-line' }}>
+          <h3>Recipe </h3>
+          {contents}
+        </div>
+      )}
       {author && (
         <em>
-          <br />
+          {fullPost && <br />}
           Written by{' '}
           <strong>
             <User id={author} />
@@ -33,4 +60,6 @@ Post.propTypes = {
   ingredients: PropTypes.string,
   contents: PropTypes.string,
   author: PropTypes.string,
+  _id: PropTypes.string.isRequired,
+  fullPost: PropTypes.bool,
 }

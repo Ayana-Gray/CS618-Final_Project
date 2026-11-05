@@ -18,6 +18,7 @@ export function Signup() {
   return (
     <main className='signup-page'>
       <header className='signup-header'>
+        <link rel='stylesheet' href='/src/App.css' />
         <br />
         <h1>Crave Recipes</h1>
         <p>Crave · Create · Consume</p>
@@ -33,7 +34,6 @@ export function Signup() {
           <center>
             <h2>Please Sign Up</h2>
           </center>
-          <br />
           <div>
             <label htmlFor='create-username'>Username: </label>
             <input

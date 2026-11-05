@@ -6,6 +6,7 @@ import { Header } from '../components/Header.jsx'
 import { useQuery } from '@tanstack/react-query'
 import { getPosts } from '../api/posts.js'
 import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 export function Blog() {
   const [author, setAuthor] = useState('')
   const [sortBy, setSortBy] = useState('createdAt')
@@ -20,6 +21,12 @@ export function Blog() {
   return (
     <main className='blog-page'>
       <header className='blog-header'>
+        <Helmet>
+          <title>Crave Recipe Blog</title>
+          <meta name='description' content='Recipes listed on Crave.' />
+        </Helmet>
+
+        <link rel='stylesheet' href='/src/App.css' />
         <br />
         <Header />
       </header>
