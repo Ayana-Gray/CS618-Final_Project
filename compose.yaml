@@ -3,7 +3,6 @@ services:
     container_name: mongodb
     image: mongo:6.0.4
     # Uses host network in Codespaces to prevent bridge timeouts.
-    # In production, you can remove network_mode if you add a bridge network.
     network_mode: host
     restart: always
 
