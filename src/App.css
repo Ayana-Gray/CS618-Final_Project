@@ -464,3 +464,29 @@ article{ font: inherit}
   max-height: 26rem;
   object-fit: contain;
 }
+.post-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+  gap: 1.25rem;
+  margin: 2rem auto;
+  color: #1e293b;
+  max-width: 64rem;
+  justify-content: center;
+}
+
+.post-stats-total {
+  grid-column: 1 / -1;
+}
+
+.post-stats-chart {
+  min-width: 0;
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: 0.75rem;
+  text-align: center;
+}
+
+.post-stats-chart h3,
+.post-stats-chart h4 {
+  margin: 0 0 0.75rem;
+}
