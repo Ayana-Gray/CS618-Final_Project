@@ -476,6 +476,7 @@ article{ font: inherit}
 
 .post-stats-total {
   grid-column: 1 / -1;
+  color: #fff;
 }
 
 .post-stats-chart {
