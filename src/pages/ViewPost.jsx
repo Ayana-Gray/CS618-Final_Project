@@ -79,7 +79,7 @@ export function ViewPost({ postId }) {
       <section className='view-post-page'>
         {post ? (
           <div>
-            <Post {...post} fullPost />
+            <Post {...post} fullPost id={postId} author={userInfo} />
             <br />
             <hr />
             <PostStats postId={postId} />
