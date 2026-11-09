@@ -6,7 +6,7 @@ export function Post({
   title,
   contents,
   author,
-  _id,
+  id,
   ingredients,
   image,
   fullPost = false,
@@ -17,14 +17,14 @@ export function Post({
         (fullPost ? (
           <img src={image} alt={title} />
         ) : (
-          <Link to={`/posts/${_id}/${slug(title)}`}>
+          <Link to={`/posts/${id}/${slug(title)}`}>
             <img src={image} alt={title} />
           </Link>
         ))}
       {fullPost ? (
         <h2>{title}</h2>
       ) : (
-        <Link to={`/posts/${_id}/${slug(title)}`}>
+        <Link to={`/posts/${id}/${slug(title)}`}>
           <h3>{title}</h3>
         </Link>
       )}
@@ -47,7 +47,7 @@ export function Post({
           {fullPost && <br />}
           Written by{' '}
           <strong>
-            <User id={author} />
+            <User {...author} />
           </strong>
         </em>
       )}
@@ -59,7 +59,7 @@ Post.propTypes = {
   image: PropTypes.string,
   ingredients: PropTypes.string,
   contents: PropTypes.string,
-  author: PropTypes.string,
-  _id: PropTypes.string.isRequired,
+  author: PropTypes.shape(User.propTypes),
+  id: PropTypes.string.isRequired,
   fullPost: PropTypes.bool,
 }

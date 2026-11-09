@@ -1,0 +1,4 @@
+{
+  "schema": "https://miniature-space-guide-r46w9xj6wqvjhwjp4-3000.app.github.dev/graphql",
+  "documents": "src/api/graphql/**/*.{js,jsx}"
+}
