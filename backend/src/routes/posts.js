@@ -5,6 +5,7 @@ import {
   createPost,
   updatePost,
   deletePost,
+  addLike,
   getPostById,
 } from '../services/posts.js'
 import { requireAuth } from '../middleware/jwt.js'
@@ -65,6 +66,16 @@ export function postsRoutes(app) {
       return res.status(204).end()
     } catch (err) {
       console.error('error deleting post', err)
+      return res.status(500).end()
+    }
+  })
+  app.patch('/api/v1/posts/:id/likes', requireAuth, async (req, res) => {
+    try {
+      const post = await addLike(req.auth.sub, req.params.id)
+      if (post === null) return res.sendStatus(404)
+      return res.json(post)
+    } catch (err) {
+      console.error('error adding post like', err)
       return res.status(500).end()
     }
   })

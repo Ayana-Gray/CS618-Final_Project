@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types'
+import { jwtDecode } from 'jwt-decode'
 import { User } from './User.jsx'
 import { Link } from 'react-router-dom'
 import slug from 'slug'
+import { useState } from 'react'
+import { useAuth } from '../contexts/AuthContext.jsx'
+import { addLike } from '../api/posts.js'
 export function Post({
   title,
   contents,
@@ -9,8 +13,26 @@ export function Post({
   id,
   ingredients,
   image,
+  likes = [],
   fullPost = false,
 }) {
+  const [token] = useAuth()
+  const [liked, setLiked] = useState(false)
+  const [error, setError] = useState('')
+  const [likeCount, setLikeCount] = useState(likes.length)
+  const userId = token ? jwtDecode(token).sub : null
+  const alreadyLiked = likes.some((likeId) => String(likeId) === String(userId))
+  const isLiked = alreadyLiked || liked
+
+  async function handleLike() {
+    try {
+      const updatedPost = await addLike(token, id)
+      setLikeCount(updatedPost.likes.length)
+      setLiked(true)
+    } catch (err) {
+      setError(err.message)
+    }
+  }
   return (
     <article className='user-post'>
       {image &&
@@ -51,6 +73,16 @@ export function Post({
           </strong>
         </em>
       )}
+      <br />
+      <br />
+      <input
+        type='button'
+        value={isLiked ? 'Liked' : 'Like'}
+        disabled={!token || isLiked}
+        onClick={handleLike}
+      />
+      <span> {likeCount}</span>
+      {error && <p role='alert'>{error}</p>}
     </article>
   )
 }
@@ -60,6 +92,7 @@ Post.propTypes = {
   ingredients: PropTypes.string,
   contents: PropTypes.string,
   author: PropTypes.shape(User.propTypes),
+  likes: PropTypes.arrayOf(PropTypes.string),
   id: PropTypes.string.isRequired,
   fullPost: PropTypes.bool,
 }

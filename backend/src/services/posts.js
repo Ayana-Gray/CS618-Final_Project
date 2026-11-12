@@ -48,3 +48,10 @@ export async function updatePost(
 export async function deletePost(userId, postId) {
   return await Post.deleteOne({ _id: postId, author: userId })
 }
+export async function addLike(userId, postId) {
+  return await Post.findByIdAndUpdate(
+    postId,
+    { $addToSet: { likes: userId } },
+    { new: true },
+  )
+}

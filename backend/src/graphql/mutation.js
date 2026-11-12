@@ -1,4 +1,5 @@
 import { GraphQLError } from 'graphql'
+import { addLike } from '../services/posts.js'
 import { createUser, loginUser } from '../services/users.js'
 import { createPost } from '../services/posts.js'
 export const mutationSchema = `#graphql
@@ -6,6 +7,7 @@ type Mutation {
 signupUser(username: String!, password: String!): User
 loginUser(username: String!, password: String!): String
 createPost(title: String!, contents: String, ingredients: String, image: String, tags:[String]): Post
+addLike(postId: ID!): Post
 }
 `
 export const mutationResolver = {
@@ -38,6 +40,15 @@ export const mutationResolver = {
         image,
         tags,
       })
+    },
+    addLike: async (_parent, { postId }, { auth }) => {
+      if (!auth?.sub) {
+        throw new GraphQLError('You need to be logged in to like a post.', {
+          extensions: { code: 'UNAUTHORIZED' },
+        })
+      }
+
+      return await addLike(auth.sub, postId)
     },
   },
 }

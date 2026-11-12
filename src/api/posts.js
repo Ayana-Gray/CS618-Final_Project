@@ -22,3 +22,17 @@ export const createPost = async (token, post) => {
   })
   return await res.json()
 }
+export const addLike = async (token, postId) => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/posts/${postId}/likes`,
+    {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  )
+
+  if (!res.ok) throw new Error('Could not add like')
+  return await res.json()
+}

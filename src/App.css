@@ -104,7 +104,10 @@ article{ font: inherit}
   border-radius: 0.7rem;
   object-fit: cover;
 }
-
+.user-post button {
+  display: block;
+  margin-left: auto;
+}
 .user-post h2 {
   margin: 0 0 1rem;
   color: #1e293b;
