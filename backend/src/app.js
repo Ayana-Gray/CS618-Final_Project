@@ -3,6 +3,9 @@ import { postsRoutes } from './routes/posts.js'
 import { userRoutes } from './routes/users.js'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import { createServer } from 'node:http'
+import { Server } from 'socket.io'
+import { handleSocket } from './socket.js'
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
@@ -11,10 +14,18 @@ userRoutes(app)
 app.get('/', (req, res) => {
   res.send('Hello from Express Nodemon!')
 })
-app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
-    return res.status(401).json({ error: 'Please log in to continue.' })
-  }
-  return next(err)
+const server = createServer(app)
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  },
 })
-export { app }
+handleSocket(io)
+/*io.on('connection', (socket) => {
+  console.log('user connected:', socket.id)
+  socket.on('disconnect', () => {
+    console.log('user disconnected:', socket.id)
+  })
+})*/
+export { server as app }
+// export { app }
