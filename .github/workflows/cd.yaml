@@ -23,6 +23,7 @@ jobs:
         with:
           service_account: ${{ secrets.GOOGLECLOUD_SERVICE_ACCOUNT }}
           credentials_json: ${{ secrets.GOOGLECLOUD_CREDENTIALS }}
+          create_credentials_file: false
       
       - name: Build and push backend image
         uses: docker/build-push-action@v6

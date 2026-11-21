@@ -388,3 +388,53 @@ article{ font: inherit}
 .signup-form [role='alert'] {
   color: #b91c1c;
 }
+
+.chat-page {
+  box-sizing: border-box;
+  max-width: 100rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  color: #1e293b;
+  background-color: #1e293b;
+}
+
+.chat-header {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  background: #f1f5f9;
+  border-radius: 1rem;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.chat-header p {
+  margin: 0.5rem 0 0;
+  color: #64748b;
+}
+
+.chat-page > div:first-of-type {
+  max-width: 28rem;
+  margin: 1.5rem auto;
+  padding: 1rem 1.25rem;
+  color: #1e293b;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+  text-align: center;
+
+}
+
+.chat-page > div:nth-of-type(2) {
+  max-width: 56rem;
+  margin: 1.5rem auto;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+  text-align: center;
+}
