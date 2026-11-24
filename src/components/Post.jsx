@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 import { jwtDecode } from 'jwt-decode'
 import { User } from './User.jsx'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import slug from 'slug'
-import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext.jsx'
 import { addLike } from '../api/posts.js'
+import { useApolloClient } from '@apollo/client/react/index.js'
 export function Post({
   title,
   contents,
@@ -20,15 +21,28 @@ export function Post({
   const [liked, setLiked] = useState(false)
   const [error, setError] = useState('')
   const [likeCount, setLikeCount] = useState(likes.length)
+  useEffect(() => {
+    setLikeCount(likes.length)
+  }, [likes.length])
   const userId = token ? jwtDecode(token).sub : null
   const alreadyLiked = likes.some((likeId) => String(likeId) === String(userId))
   const isLiked = alreadyLiked || liked
-
+  const client = useApolloClient()
   async function handleLike() {
     try {
       const updatedPost = await addLike(token, id)
       setLikeCount(updatedPost.likes.length)
       setLiked(true)
+
+      const cacheId = client.cache.identify({ __typename: 'Post', id })
+      if (cacheId) {
+        client.cache.modify({
+          id: cacheId,
+          fields: {
+            likes: () => updatedPost.likes.map(String),
+          },
+        })
+      }
     } catch (err) {
       setError(err.message)
     }

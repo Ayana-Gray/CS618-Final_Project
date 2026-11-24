@@ -22,6 +22,7 @@ export function Blog() {
 
   const postsQuery = useGraphQLQuery(author ? GET_POSTS_BY_AUTHOR : GET_POSTS, {
     variables: { author, options: { sortBy, sortOrder } },
+    fetchPolicy: 'network-only',
   })
 
   const posts = postsQuery.data?.postsByAuthor ?? postsQuery.data?.posts ?? []
@@ -29,10 +30,13 @@ export function Blog() {
   const displayedPosts =
     sortBy === 'likes'
       ? [...posts].sort((a, b) => {
-          const difference = (a.likes?.length ?? 0) - (b.likes?.length ?? 0)
-          return sortOrder === 'ascending' ? difference : -difference
+          const aLikes = a.likes?.length ?? 0
+          const bLikes = b.likes?.length ?? 0
+
+          return sortOrder === 'ascending' ? aLikes - bLikes : bLikes - aLikes
         })
       : posts
+
   return (
     <main className='blog-page'>
       <header className='blog-header'>
