@@ -10,16 +10,18 @@ export function ViewPost() {
     queryKey: ['post', postId],
     queryFn: () => getPostById(postId),
   })
+
   const post = postQuery.data
+
   return (
-    <div style={{ padding: 8 }}>
-      <Header />
-      <br />
-      <hr />
-      <Link to='/'>Back to main page</Link>
-      <br />
-      <hr />
-      {post ? <Post {...post} fullPost /> : `Post with id${postId} not found.`}
-    </div>
+    <main className='view-post-page'>
+      <header className='view-post-header'>
+        <Header />
+        <br />
+        <Link to='/'>Back to main page</Link>
+      </header>
+
+      {post ? <Post {...post} fullPost /> : `Post with id ${postId} not found.`}
+    </main>
   )
 }

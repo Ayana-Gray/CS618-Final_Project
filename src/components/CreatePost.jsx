@@ -18,7 +18,14 @@ export function CreatePost() {
     e.preventDefault()
     createPostMutation.mutate()
   }
-  if (!token) return <div>Please log in to create new posts.</div>
+  if (!token) {
+    return (
+      <div className='createpost-login-required'>
+        Please log in to create new posts.
+      </div>
+    )
+  }
+
   return (
     <form onSubmit={handleSubmit} className='createpost-form'>
       <div>
