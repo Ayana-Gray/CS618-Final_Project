@@ -18,6 +18,7 @@ export function CreatePost() {
     e.preventDefault()
     createPostMutation.mutate()
   }
+  if (!token) return <div>Please log in to create new posts.</div>
   return (
     <form onSubmit={handleSubmit} className='createpost-form'>
       <div>
@@ -63,7 +64,6 @@ export function CreatePost() {
       </div>
       <br />
       <br />
-      {!token ? <p>Please log in to create a post.</p> : null}
       <input
         type='submit'
         value={createPostMutation.isPending ? 'Creating...' : 'Create'}

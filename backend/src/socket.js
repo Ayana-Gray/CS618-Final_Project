@@ -1,4 +1,23 @@
-import jwt from 'jsonwebtoken'
+export function handleSocket(io) {
+  io.on('connection', (socket) => {
+    console.log('user connected:', socket.id)
+    const room = socket.handshake.query?.room ?? 'public'
+    socket.join(room)
+    //console.log(socket.id, 'joined room:', room)
+    socket.on('disconnect', () => {
+      console.log('user disconnected:', socket.id)
+    })
+    socket.on('chat.message', (message) => {
+      console.log(`${socket.id}: ${message}`)
+      //broadcasted to everyone except the user use
+      //socket.broadcast.to(room)emit('chat.message', { username: socket.id, message })
+
+      io.to(room).emit('chat.message', { username: socket.id, message })
+    })
+  })
+}
+
+/*import jwt from 'jsonwebtoken'
 import { getUserInfoById } from './services/users.js'
 export function handleSocket(io) {
   io.use((socket, next) => {
@@ -47,4 +66,4 @@ export function handleSocket(io) {
       return callback(userInfo)
     })
   })
-}
+}*/

@@ -2,14 +2,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Blog } from './pages/Blog.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { Login } from './pages/Login.jsx'
+import { ViewPost } from './pages/ViewPost.jsx'
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
 import { io } from 'socket.io-client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 const socket = io(import.meta.env.VITE_SOCKET_HOST, {
   query: 'room=' + new URLSearchParams(window.location.search).get('room'),
-  auth: {
-    token: new URLSearchParams(window.location.search).get('token'),
-  },
 })
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -25,6 +23,10 @@ const router = createBrowserRouter([
     path: '/login',
     element: <Login />,
   },
+  {
+    path: '/posts/:postId',
+    element: <ViewPost />,
+  },
 ])
 socket.on('connect', async () => {
   console.log('connected to socket.io as', socket.id)
@@ -32,8 +34,6 @@ socket.on('connect', async () => {
     'chat.message',
     new URLSearchParams(window.location.search).get('mymsg'),
   )
-  const userInfo = await socket.emitWithAck('user.info', socket.id)
-  console.log('user info', userInfo)
 })
 socket.on('connect_error', (err) => {
   console.error('socket.io connect error:', err)
