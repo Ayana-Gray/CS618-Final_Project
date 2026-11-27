@@ -6,6 +6,7 @@ import { Header } from '../components/Header.jsx'
 import { useQuery } from '@tanstack/react-query'
 import { getPosts } from '../api/posts.js'
 import { useState } from 'react'
+import { Chat } from '../components/Chat.jsx'
 export function Blog() {
   const [author, setAuthor] = useState('')
   const [sortBy, setSortBy] = useState('createdAt')
@@ -23,6 +24,10 @@ export function Blog() {
         <br />
         <Header />
       </header>
+
+      <section className='blog-chat'>
+        <Chat />
+      </section>
 
       <section className='blog-create'>
         <CreatePost />

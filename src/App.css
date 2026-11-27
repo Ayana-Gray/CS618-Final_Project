@@ -60,8 +60,8 @@
   resize: vertical;
 }
 
-.create-postform input:focus,
-.create-postform textarea:focus {
+.createpost-form input:focus,
+.createpost-form textarea:focus {
   border-color: #4f46e5;
   outline: 3px solid rgb(79 70 229 / 15%);
 }
@@ -138,7 +138,7 @@ article{ font: inherit}
   margin: 0 auto;
   padding: 1.5rem;
   color: #1e293b;
-  background-color:#1e293b
+  background-color:#1e293b;
 }
 
 .blog-header {
@@ -195,7 +195,15 @@ article{ font: inherit}
 .blog-posts {
   margin-top: 2rem;
 }
-
+.blog-chat {
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+}
 .login-page {
   box-sizing: border-box;
   max-width: 100rem;
